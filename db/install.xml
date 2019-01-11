@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="blocks/nss/db" VERSION="20161205" COMMENT="XMLDB file for Moodle blocks/nss"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
+>
+  <TABLES>    
+    <TABLE NAME="nss" COMMENT="NSS advert block.">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="studentid" TYPE="int" LENGTH="11" NOTNULL="true" SEQUENCE="false" COMMENT="Foreign key references user idnumber"/>
+        <FIELD NAME="nss" TYPE="int" LENGTH="1" NOTNULL="false" SEQUENCE="false" COMMENT="NSS or Yourcourse survey option"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+        <KEY NAME="studentid" TYPE="foreign" FIELDS="studentid" REFTABLE="user" REFFIELDS="idnumber"/>
+      </KEYS>
+    </TABLE>
+  </TABLES>
+</XMLDB>
