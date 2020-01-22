@@ -1,0 +1,11 @@
+.img_nss{
+	width: 100%;
+}
+
+.block_nss .mt-3{
+	margin-top: 0 !important;
+}
+
+.block_nss .p-3 {
+    padding: 0 !important;
+}
