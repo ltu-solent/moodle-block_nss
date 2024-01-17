@@ -22,10 +22,49 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die;
+use block_nss\admin_setting_configdatetime;
 
+defined('MOODLE_INTERNAL') || die();
+
+$ADMIN->add('blocksettings', new admin_category('nssfolder', new lang_string('pluginname', 'block_nss')));
+$ADMIN->add('nssfolder', new admin_externalpage(
+    'block_nss_uploadusers',
+    get_string('uploadusers', 'block_nss'),
+    new moodle_url('/blocks/nss/uploadusers.php')
+));
+$settings = null;
 
 if ($ADMIN->fulltree) {
-	$settings->add(new admin_setting_configtext('block_nss/displayfrom', get_string('displayfrom', 'block_nss'), '', ''));
-	$settings->add(new admin_setting_configtext('block_nss/displayto', get_string('displayto', 'block_nss'), '', ''));
+    $settingspage = new admin_settingpage($section, new lang_string('settings'));
+    $ADMIN->add('nssfolder', $settingspage);
+    $settingspage->add(new admin_setting_configdatetime('block_nss/displayfrom',
+        new lang_string('displayfrom', 'block_nss'),
+        '',
+        0
+    ));
+    $settingspage->add(new admin_setting_configdatetime('block_nss/displayto',
+        new lang_string('displayto', 'block_nss'),
+        '',
+        0
+    ));
+    $settingspage->add(new admin_setting_configtext('block_nss/nsslink',
+        new lang_string('nsslink', 'block_nss'),
+        '',
+        'https://www.thestudentsurvey.com',
+        PARAM_URL
+    ));
+    $settingspage->add(new admin_setting_configtext('block_nss/image',
+        new lang_string('image', 'block_nss'),
+        'nss.jpg',
+        PARAM_FILE
+    ));
+    $default = 'Final year students: we want to know how you\'ve found your time at Solent. ' .
+        'Complete the National Student Survey by Sunday 30 April and you could win a £400 ' .
+        'Currys PC World voucher or one of ten £50 Amazon vouchers.';
+    $settingspage->add(new admin_setting_configtextarea('block_nss/alttext',
+        new lang_string('alttext', 'block_nss'),
+        '',
+        $default,
+        PARAM_RAW
+    ));
 }
