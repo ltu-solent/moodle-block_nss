@@ -22,7 +22,9 @@ use admin_setting;
  * Class admin_setting_configdatetime
  *
  * @package    block_nss
- * @copyright  2024 Solent University {@link https://www.solent.ac.uk}
+ * @copyright  2022 Alexander Bias, lern.link GmbH <alexander.bias@lernlink.de>
+ * @copyright  on behalf of Zurich University of Applied Sciences (ZHAW)
+ * @copyright  based on code by Valery Fremaux (valery.fremaux@gmail.com) in block_use_stats.
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class admin_setting_configdatetime extends admin_setting {
@@ -36,11 +38,13 @@ class admin_setting_configdatetime extends admin_setting {
 
         $datearr = getdate($result);
 
-        $data = array('h' => $datearr['hours'],
-                'm' => $datearr['minutes'],
-                'y' => $datearr['year'],
-                'M' => $datearr['mon'],
-                'd' => $datearr['mday']);
+        $data = [
+            'h' => $datearr['hours'],
+            'm' => $datearr['minutes'],
+            'y' => $datearr['year'],
+            'M' => $datearr['mon'],
+            'd' => $datearr['mday'],
+        ];
         return $data;
     }
 
