@@ -26,5 +26,5 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'block_nss';
-$plugin->version = 2021020401;
-$plugin->requires = 2010112400;
+$plugin->version = 2025012000;
+$plugin->requires = 2024100700;

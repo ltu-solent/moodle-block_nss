@@ -14,6 +14,8 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+use core\output\html_writer;
+
 /**
  * NSS block
  *
@@ -75,14 +77,18 @@ class block_nss extends block_base {
             }
             // Display banner including tracking.
             if ($DB->record_exists('nss', ['studentid' => $idnumber])) {
-                $this->content->text = html_writer::link($config->nsslink,
-                    html_writer::img("/blocks/nss/images/{$config->image}",
+                $this->content->text = html_writer::link(
+                    $config->nsslink,
+                    html_writer::img(
+                        "/blocks/nss/images/{$config->image}",
                         format_text($config->alttext, FORMAT_PLAIN),
                         ['class' => 'img_nss']
-                    ), [
-                    'target' => '_blank',
-                    'onclick' => $gtag,
-                ]);
+                    ),
+                    [
+                        'target' => '_blank',
+                        'onclick' => $gtag,
+                    ]
+                );
             }
         }
         return $this->content;

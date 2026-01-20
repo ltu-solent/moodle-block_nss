@@ -16,9 +16,9 @@
 
 namespace block_nss;
 
+use core\exception\moodle_exception;
 use core_text;
 use csv_import_reader;
-use moodle_exception;
 
 /**
  * Class helper

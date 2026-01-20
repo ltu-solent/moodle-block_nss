@@ -40,7 +40,6 @@ use moodleform;
  * CSV upload form for student idnumbers
  */
 class mapping_upload_form extends moodleform {
-
     /**
      * Defintion of form fields for Mapping uploader.
      */

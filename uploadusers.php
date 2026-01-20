@@ -23,14 +23,18 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+use core\context\system;
+use core\exception\moodle_exception;
+use core\url;
+
 require('../../config.php');
 require_once($CFG->libdir . '/adminlib.php');
 
 admin_externalpage_setup('block_nss_uploadusers');
 
-$url = new moodle_url('/blocks/nss/uploadusers.php', []);
+$url = new url('/blocks/nss/uploadusers.php', []);
 $PAGE->set_url($url);
-$PAGE->set_context(context_system::instance());
+$PAGE->set_context(system::instance());
 
 $PAGE->set_heading(get_string('uploadusers', 'block_nss'));
 
@@ -75,9 +79,7 @@ if ($mappinguploadformdata = $mappinguploadform->get_data()) {
         if (strlen($entry->studentid) == 7) {
             $entry->studentid = '0' . $entry->studentid;
         }
-        if ($existingentry = $DB->get_record('nss', [
-                'studentid' => $entry->studentid,
-            ])) {
+        if ($existingentry = $DB->get_record('nss', ['studentid' => $entry->studentid])) {
             // Record already exists, so skip.
             continue;
         }
