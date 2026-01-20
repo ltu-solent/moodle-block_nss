@@ -46,5 +46,16 @@ function xmldb_block_nss_upgrade($oldversion) {
         $dbman->add_key($table, $key);
     }
 
+    if ($oldversion < 2025012001) {
+        // Define table nss to be renamed to block_nss.
+        $tableold = new xmldb_table('nss');
+
+        // Launch rename table for block_nss.
+        $dbman->rename_table($tableold, 'block_nss');
+
+        // NSS savepoint reached.
+        upgrade_plugin_savepoint(true, 2025012001, 'block', 'nss');
+    }
+
     return true;
 }

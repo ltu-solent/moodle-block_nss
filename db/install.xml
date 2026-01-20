@@ -4,7 +4,7 @@
     xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
 >
   <TABLES>    
-    <TABLE NAME="nss" COMMENT="NSS advert block.">
+    <TABLE NAME="block_nss" COMMENT="NSS advert block.">
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
         <FIELD NAME="studentid" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="Foreign key references user idnumber"/>
