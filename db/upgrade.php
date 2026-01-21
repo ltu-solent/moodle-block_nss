@@ -34,17 +34,6 @@
 function xmldb_block_nss_upgrade($oldversion) {
     global $DB;
     $dbman = $DB->get_manager();
-    if ($oldversion < 2021020401) {
-        $table = new xmldb_table('nss');
-        $field = new xmldb_field('studentid', XMLDB_TYPE_CHAR, 255, null, true, false);
-        // Need to drop the key before change the field type as this is foreign key.
-        $key = new xmldb_key('studentid', XMLDB_KEY_FOREIGN, ['studentid'], 'user', ['idnumber']);
-        $dbman->drop_key($table, $key);
-        if ($dbman->field_exists($table, $field)) {
-            $dbman->change_field_type($table, $field);
-        }
-        $dbman->add_key($table, $key);
-    }
 
     if ($oldversion < 2025012001) {
         // Define table nss to be renamed to block_nss.
