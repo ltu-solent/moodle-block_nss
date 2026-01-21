@@ -31,7 +31,7 @@ jobs:
         with:
           repository: 'ltu-solent/moodle-block_nss'
           path: ./blocks/nss
-          ref: ${{ matrix.moodle-branch }}
+          ref: 'main'
 
       - name: Setup PHP ${{ matrix.php }}
         uses: shivammathur/setup-php@v2
