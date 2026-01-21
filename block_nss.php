@@ -76,7 +76,7 @@ class block_nss extends block_base {
                 return $this->content;
             }
             // Display banner including tracking.
-            if ($DB->record_exists('nss', ['studentid' => $idnumber])) {
+            if ($DB->record_exists('block_nss', ['studentid' => $idnumber])) {
                 $this->content->text = html_writer::link(
                     $config->nsslink,
                     html_writer::img(

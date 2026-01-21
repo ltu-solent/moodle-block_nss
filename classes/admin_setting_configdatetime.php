@@ -52,7 +52,7 @@ class admin_setting_configdatetime extends admin_setting {
      * Store the time as unix timestamp.
      *
      * @param array $data Must be form 'y' => xxxx, 'M' => xx, 'd' => xx, 'h'=>xx, 'm'=>xx
-     * @return bool true if success, false if not
+     * @return bool|string true if success, false if not
      */
     public function write_setting($data) {
         if (!is_array($data)) {
@@ -92,7 +92,7 @@ class admin_setting_configdatetime extends admin_setting {
         $return .= '<select id="' . $this->get_id() . 'M" name="' . $this->get_full_name() . '[M]" class="custom-select mr-2">';
         for ($i = 1; $i <= 12; $i++) {
             $sel = ($i == $data['M'] ? ' selected="selected"' : '');
-            $dateobj = \DateTime::createFromFormat('!m', $i);
+            $dateobj = \DateTime::createFromFormat('!m', (string)$i);
             $return .= '<option value="' . $i . '"' . $sel . '>' . userdate($dateobj->getTimestamp(), '%B') . '</option>';
         }
         $return .= '</select>';

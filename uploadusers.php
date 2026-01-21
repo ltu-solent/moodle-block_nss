@@ -60,7 +60,7 @@ if ($mappinguploadformdata = $mappinguploadform->get_data()) {
     $linenum = 1;
     $countadded = 0;
     // Delete all existing records.
-    $DB->delete_records('nss');
+    $DB->delete_records('block_nss');
     while ($line = $cir->next()) {
         $linenum++;
         $entry = new stdClass();
@@ -79,12 +79,12 @@ if ($mappinguploadformdata = $mappinguploadform->get_data()) {
         if (strlen($entry->studentid) == 7) {
             $entry->studentid = '0' . $entry->studentid;
         }
-        if ($existingentry = $DB->get_record('nss', ['studentid' => $entry->studentid])) {
+        if ($existingentry = $DB->get_record('block_nss', ['studentid' => $entry->studentid])) {
             // Record already exists, so skip.
             continue;
         }
 
-        $DB->insert_record('nss', $entry);
+        $DB->insert_record('block_nss', $entry);
         $countadded++;
     }
     $notification = get_string('newmappingsadded', 'block_nss', (object)['new' => $countadded, 'supplied' => $linenum - 1]);

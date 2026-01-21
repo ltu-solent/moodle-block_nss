@@ -1,0 +1,36 @@
+includes:
+	- ../../vendor/micaherne/phpstan-moodle/extension.neon
+parameters:
+	level: 5
+	moodle:
+		rootDirectory: %currentWorkingDirectory%
+	ignoreErrors:
+		-
+			message: '#^Parameter \#2 \$format of function format_text expects int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: ../../../web/html/blocks/nss/block_nss.php
+
+		-
+			message: '#^Call to function is_array\(\) with array will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: ../../../web/html/blocks/nss/classes/admin_setting_configdatetime.php
+
+		-
+			message: '#^Call to function is_null\(\) with string will always evaluate to false\.$#'
+			identifier: function.impossibleType
+			count: 1
+			path: ../../../web/html/blocks/nss/uploadusers.php
+
+		-
+			message: '#^Strict comparison using \!\=\= between '''' and '''' will always evaluate to false\.$#'
+			identifier: notIdentical.alwaysFalse
+			count: 1
+			path: ../../../web/html/blocks/nss/uploadusers.php
+
+		-
+			message: '#^Unreachable statement \- code above always terminates\.$#'
+			identifier: deadCode.unreachable
+			count: 1
+			path: ../../../web/html/blocks/nss/uploadusers.php
