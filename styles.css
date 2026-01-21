@@ -1,13 +1,12 @@
 /* stylelint-disable declaration-no-important */
 .img_nss {
-	width: 100%;
+    width: 100%;
 }
 
 .block_nss .mt-3 {
-
-	margin-top: 0 !important;
+    margin-top: 0 !important;
 }
 
 .block_nss .p-3 {
-	padding: 0 !important;
+    padding: 0 !important;
 }
