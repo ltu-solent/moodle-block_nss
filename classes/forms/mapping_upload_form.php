@@ -31,10 +31,10 @@ require_once($CFG->libdir . '/csvlib.class.php');
 require_once($CFG->libdir . '/formslib.php');
 
 use core\lang_string;
+use core\output\html_writer;
+use core\url;
 use core_text;
 use csv_import_reader;
-use html_writer;
-use moodle_url;
 use moodleform;
 
 /**
@@ -49,7 +49,7 @@ class mapping_upload_form extends moodleform {
 
         $mform->addElement('header', 'mappingheader', get_string('upload'));
 
-        $url = new moodle_url('example.csv');
+        $url = new url('example.csv');
         $link = html_writer::link($url, 'example.csv');
         $mform->addElement('static', 'examplecsv', get_string('examplecsv', 'block_nss'), $link);
         $mform->addHelpButton('examplecsv', 'examplecsv', 'block_nss');
