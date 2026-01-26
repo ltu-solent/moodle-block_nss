@@ -55,12 +55,15 @@ if ($mappinguploadformdata = $mappinguploadform->get_data()) {
         throw new moodle_exception('csvloaderror', '', $url, $csvloaderror);
     }
 
-    $filecolumns = block_nss\helper::validate_columns($cir, ['studentid'], $url);
+    $filecolumns = block_nss\helper::validate_columns($cir, ['studentid', 'banner'], $url);
     $cir->init();
     $linenum = 1;
     $countadded = 0;
     // Delete all existing records.
-    $DB->delete_records('block_nss');
+    if ($mappinguploadformdata->truncate) {
+        $DB->delete_records('block_nss');
+    }
+
     while ($line = $cir->next()) {
         $linenum++;
         $entry = new stdClass();
@@ -79,7 +82,7 @@ if ($mappinguploadformdata = $mappinguploadform->get_data()) {
         if (strlen($entry->studentid) == 7) {
             $entry->studentid = '0' . $entry->studentid;
         }
-        if ($existingentry = $DB->get_record('block_nss', ['studentid' => $entry->studentid])) {
+        if ($existingentry = $DB->get_record('block_nss', ['studentid' => $entry->studentid, 'banner' => $entry->banner])) {
             // Record already exists, so skip.
             continue;
         }

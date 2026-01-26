@@ -28,10 +28,10 @@ defined('MOODLE_INTERNAL') || die();
 $string['alttext'] = 'Image alt text';
 
 $string['csvdelimiter'] = 'CSV delimiter';
-$string['csvincorrectfields'] = 'Incorrect number of fields present. Only idnumber allowed.';
+$string['csvincorrectfields'] = 'Incorrect number of fields present. Only "idnumber" and "banner" allowed.';
 
-$string['displayfrom'] = 'Unix timestamp of date to display the block from';
-$string['displayto'] = 'Unix timestamp of date to display the block until';
+$string['displayfrom'] = 'Time and date of when to display the block from';
+$string['displayto'] = 'Time and date of when to display the block until';
 
 $string['examplecsv'] = 'Example CSV';
 $string['examplecsv_help'] = 'To use example CSV file, download it then open it with a text or spreadsheet editor. Leave the first line as it is, then save as a CSV file.';
@@ -42,8 +42,13 @@ $string['newmappingsadded'] = '{$a->new} new mappings added of {$a->supplied} su
 $string['nss'] = 'NSS';
 $string['nss:addinstance'] = 'Add a new NSS banner';
 $string['nss:myaddinstance'] = 'Add a new NSS banner block to the My Moodle page';
-$string['nsslink'] = 'NSS Survey url';
+$string['nssbanner'] = 'NSS banner';
+$string['nsslink'] = 'Survey url';
 
-$string['pluginname'] = 'NSS banner';
+$string['pluginname'] = 'Student Survey banner';
+
+$string['truncate'] = 'Empty table of previous users?';
 
 $string['uploadusers'] = 'Upload users';
+
+$string['ycsbanner'] = 'Your Course Survey banner';

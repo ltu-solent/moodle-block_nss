@@ -30,6 +30,7 @@ defined('MOODLE_INTERNAL') || die();
 require_once($CFG->libdir . '/csvlib.class.php');
 require_once($CFG->libdir . '/formslib.php');
 
+use core\lang_string;
 use core_text;
 use csv_import_reader;
 use html_writer;
@@ -68,6 +69,8 @@ class mapping_upload_form extends moodleform {
         $choices = core_text::get_encodings();
         $mform->addElement('select', 'encoding', get_string('encoding', 'tool_uploaduser'), $choices);
         $mform->setDefault('encoding', 'UTF-8');
+
+        $mform->addElement('selectyesno', 'truncate', new lang_string('truncate', 'block_nss'));
 
         $this->add_action_buttons(false, get_string('uploadusers', 'block_nss'));
     }

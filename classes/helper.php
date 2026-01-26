@@ -44,7 +44,7 @@ class helper {
             $cir->cleanup();
             throw new moodle_exception('cannotreadtmpfile', 'error', $returnurl);
         }
-        if (count($columns) != 1) {
+        if (count($columns) != 2) {
             $cir->close();
             $cir->cleanup();
             throw new moodle_exception('csvincorrectfields', 'block_nss', $returnurl);

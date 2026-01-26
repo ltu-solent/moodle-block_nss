@@ -8,7 +8,7 @@
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
         <FIELD NAME="studentid" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="Foreign key references user idnumber"/>
-        <FIELD NAME="nss" TYPE="int" LENGTH="1" NOTNULL="false" SEQUENCE="false" COMMENT="NSS or Yourcourse survey option"/>
+        <FIELD NAME="banner" TYPE="char" LENGTH="20" NOTNULL="false" SEQUENCE="false" COMMENT="NSS or Yourcourse survey option"/>
       </FIELDS>
       <KEYS>
         <KEY NAME="primary" TYPE="primary" FIELDS="id"/>

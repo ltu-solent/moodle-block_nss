@@ -58,30 +58,44 @@ class block_nss extends block_base {
      * @return object
      */
     public function get_content(): object {
+        global $DB, $USER;
         if ($this->content !== null) {
             return $this->content;
         }
 
-        global $USER, $DB;
         $this->content = new stdClass();
         $this->content->text = '';
         // Check date and which banner should be shown.
         $time = new DateTime("now", core_date::get_user_timezone_object());
         $now = $time->getTimestamp();
         $config = get_config('block_nss');
-        $gtag = "gtag('event', 'click', { 'event_category': 'Survey Banner', 'event_action': 'Click', 'event_label': 'NSS'});";
-        if (($now > $config->displayfrom) && ($now < $config->displayto)) {
-            $idnumber = $USER->idnumber;
-            if (trim($idnumber) == '') {
-                return $this->content;
-            }
-            // Display banner including tracking.
-            if ($DB->record_exists('block_nss', ['studentid' => $idnumber])) {
+        $idnumber = $USER->idnumber;
+        if (trim($idnumber) == '') {
+            return $this->content;
+        }
+        // There shouldn't be more than one banner for this user, but it's technically possible.
+        $userbanners = $DB->get_records('block_nss', ['studentid' => $idnumber]);
+        if (count($userbanners) == 0) {
+            return $this->content;
+        }
+        foreach ($userbanners as $userbanner) {
+            // Default to using nss banner, if not set.
+            $banner = $userbanner->banner ?? 'nss';
+            $displayfrom = $config->{$banner . "_displayfrom"};
+            $displayto = $config->{$banner . "_displayto"};
+
+            if (($now > $displayfrom) && ($now < $displayto)) {
+                $image = $config->{$banner . "_image"};
+                $link = $config->{$banner . "_link"};
+                $alttext = $config->{$banner . "_alttext"};
+                $gtag = "gtag('event', 'click', { 'event_category': 'Survey Banner', 'event_action': 'Click'," .
+                    "'event_label': '" . strtoupper($banner) . "'});";
+                // This will write over whatever has come before. There will only ever be 1 banner.
                 $this->content->text = html_writer::link(
-                    $config->nsslink,
+                    $link,
                     html_writer::img(
-                        "/blocks/nss/images/{$config->image}",
-                        format_text($config->alttext, FORMAT_PLAIN),
+                        "/blocks/nss/images/{$image}",
+                        format_text($alttext, FORMAT_PLAIN),
                         ['class' => 'img_nss']
                     ),
                     [

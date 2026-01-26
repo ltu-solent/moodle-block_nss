@@ -36,14 +36,33 @@ function xmldb_block_nss_upgrade($oldversion) {
     $dbman = $DB->get_manager();
 
     if ($oldversion < 2025012001) {
-        // Define table nss to be renamed to block_nss.
         $tableold = new xmldb_table('nss');
-
-        // Launch rename table for block_nss.
         $dbman->rename_table($tableold, 'block_nss');
-
-        // NSS savepoint reached.
         upgrade_plugin_savepoint(true, 2025012001, 'block', 'nss');
+    }
+
+    if ($oldversion < 2025012002) {
+        $table = new xmldb_table('block_nss');
+        $field = new xmldb_field('nss');
+        if ($dbman->field_exists($table, $field)) {
+            $dbman->drop_field($table, $field);
+        }
+        $field = new xmldb_field('banner', XMLDB_TYPE_CHAR, '20', null, XMLDB_NOTNULL, null, 'nss');
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+        $config = get_config('block_nss');
+        set_config('nss_displayfrom', $config->displayfrom);
+        set_config('nss_displayto', $config->displayto);
+        set_config('nss_link', $config->nsslink);
+        set_config('nss_image', $config->image);
+        set_config('nss_alttext', $config->alttext);
+        unset_config('displayfrom', 'block_nss');
+        unset_config('displayto', 'block_nss');
+        unset_config('nsslink', 'block_nss');
+        unset_config('image', 'block_nss');
+        unset_config('alttext', 'block_nss');
+        upgrade_plugin_savepoint(true, 2025012002, 'block', 'nss');
     }
 
     return true;
