@@ -90,19 +90,26 @@ class block_nss extends block_base {
                 $alttext = $config->{$banner . "_alttext"};
                 $gtag = "gtag('event', 'click', { 'event_category': 'Survey Banner', 'event_action': 'Click'," .
                     "'event_label': '" . strtoupper($banner) . "'});";
+                $linkparams = [
+                    'target' => '_blank',
+                    'onclick' => $gtag,
+                ];
                 // This will write over whatever has come before. There will only ever be 1 banner.
-                $this->content->text = html_writer::link(
-                    $link,
-                    html_writer::img(
-                        "/blocks/nss/images/{$image}",
-                        format_text($alttext, FORMAT_PLAIN),
-                        ['class' => 'img_nss']
-                    ),
-                    [
-                        'target' => '_blank',
-                        'onclick' => $gtag,
-                    ]
+                $bannerimg = html_writer::img(
+                    "/blocks/nss/images/{$image}",
+                    format_text($alttext, FORMAT_PLAIN),
+                    ['class' => 'img_nss']
                 );
+                if (empty($link)) {
+                    // No link, just the banner.
+                    $this->content->text = $bannerimg;
+                } else {
+                    $this->content->text = html_writer::link(
+                        $link,
+                        $bannerimg,
+                        $linkparams
+                    );
+                }
             }
         }
         return $this->content;
