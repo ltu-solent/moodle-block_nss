@@ -27,6 +27,8 @@ defined('MOODLE_INTERNAL') || die();
 
 $string['alttext'] = 'Image alt text';
 
+$string['banner'] = 'Banner';
+
 $string['csvdelimiter'] = 'CSV delimiter';
 $string['csvincorrectfields'] = 'Incorrect number of fields present. Only "idnumber" and "banner" allowed.';
 
@@ -44,6 +46,7 @@ $string['nss:addinstance'] = 'Add a new NSS banner';
 $string['nss:myaddinstance'] = 'Add a new NSS banner block to the My Moodle page';
 $string['nssbanner'] = 'NSS banner';
 $string['nsslink'] = 'Survey url';
+$string['nssusers'] = 'Survey users';
 
 $string['pluginname'] = 'Student Survey banner';
 

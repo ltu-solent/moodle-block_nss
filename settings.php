@@ -34,6 +34,14 @@ $ADMIN->add('nssfolder', new admin_externalpage(
     get_string('uploadusers', 'block_nss'),
     new url('/blocks/nss/uploadusers.php')
 ));
+$ADMIN->add(
+    'nssfolder',
+    new admin_externalpage(
+        'block_nss_users',
+        new lang_string('nssusers', 'block_nss'),
+        new url('/blocks/nss/users.php')
+    )
+);
 $settings = null;
 
 if ($ADMIN->fulltree) {
