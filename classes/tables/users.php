@@ -37,7 +37,7 @@ class users extends sql_table {
      */
     public function __construct($uniqueid) {
         parent::__construct($uniqueid);
-        $this->useridfield = 'studentid';
+        $this->useridfield = 'userid';
         $columns = [
             'id' => 'id',
             'fullname' => new lang_string('fullname'),
@@ -48,7 +48,7 @@ class users extends sql_table {
         $this->collapsible(false);
         $this->define_baseurl(new url('/blocks/nss/users.php'));
         $userfieldsapi = fields::for_identity(system::instance(), false)->with_userpic();
-        $userfields = $userfieldsapi->get_sql('u')->selects;
+        $userfields = $userfieldsapi->get_sql('u', false, '', 'userid')->selects;
         $select = 'n.id, n.studentid, n.banner' . $userfields;
         $from = "{block_nss} n
         JOIN {user} u ON u.idnumber = n.studentid";
